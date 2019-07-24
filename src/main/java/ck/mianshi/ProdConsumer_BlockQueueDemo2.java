@@ -13,6 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ProdConsumer_BlockQueueDemo2 {
     public static void main(String[] args) throws Exception {
         MyResource myResource = new MyResource(new ArrayBlockingQueue<>(10));
+        System.out.println(Runtime.getRuntime().availableProcessors());
         new Thread(() -> {
             System.out.println(Thread.currentThread().getName() + "\t 生产线程启动");
             try{
@@ -34,6 +35,7 @@ public class ProdConsumer_BlockQueueDemo2 {
         try{TimeUnit.SECONDS.sleep(5);}catch (InterruptedException e) {e.printStackTrace();}
         System.out.println("5S到，活动结束");
         myResource.stop();
+
     }
 }
 class MyResource {
