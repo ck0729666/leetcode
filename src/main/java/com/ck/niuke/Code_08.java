@@ -87,48 +87,23 @@ public class Code_08 {
             index = (index-1)/2;
         }
     }
-    public static void modify(int[] arr, int index, int heapsize){
+
+    //一个值变小往下沉的操作
+    //index是父节点索引，heapSize判断是否越界
+    public static void heapify(int[] arr, int index, int heapSize){
         int left = index*2+1;
-        while (left<heapsize){
-            int largest = (left+1)<heapsize && arr[left]<arr[left+1] ? left+1 : left;
-            largest = arr[largest]>arr[index] ? largest : index;
+        while (left<heapSize){
+            int largest = left+1<heapSize&&arr[left+1]>arr[left] ? left+1 : left;
+            largest = arr[largest]>arr[index] ? largest:index;
             if(largest==index){
-               break;
+                break;
             }
-            swap(arr,largest,index);
+            swap(arr, largest, index);
             index = largest;
             left = 2*index+1;
         }
     }
-    public static void heapsort(int[] arr){
-        if(arr==null||arr.length<2){
-            return;
-        }
-        //建堆
-        for (int i = 0; i < arr.length; i++){
-            heapInsert(arr,i);
-        }
-        int heapSize = arr.length;
-        swap(arr, --heapSize, 0);
-        while (heapSize>0){
-            heapify(arr, heapSize, 0);
-            swap(arr,--heapSize, 0);
-        }
-    }
-    public static void heapsort2(int[] arr){
-        if(arr==null||arr.length <2){
-            return;
-        }
-        for(int i = 0; i < arr.length; i++){
-            heapInsert(arr, i);
-        }
-        int heapSize = arr.length;
-        swap(arr,--heapSize,0);
-        while (heapSize>0){
-            heapify(arr,heapSize,0);
-            swap(arr,--heapSize,0);
-        }
-    }
+
 
     public static boolean isPalindrome3(ListNode head){
         if(head==null||head.next==null){
@@ -201,22 +176,6 @@ public class Code_08 {
 
 
 
-
-    //一个值变小往下沉的操作
-    //index是父节点索引，heapSize判断是否越界
-    public static void heapify(int[] arr, int index, int heapSize){
-        int left = index*2+1;
-        while (left<heapSize){
-            int largest = left+1<heapSize&&arr[left+1]>arr[left] ? left+1 : left;
-            largest = arr[largest]>arr[index] ? largest:index;
-            if(largest==index){
-                break;
-            }
-            swap(arr, largest, index);
-            index = largest;
-            left = 2*index+1;
-        }
-    }
 
 
 

@@ -1,17 +1,9 @@
 package com.ck.demo.test;
 
+
 import java.util.*;
-import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 
 public class Solution1111 {
-
-    public static void main(String[] args) {
-        //a 97 A 65 0 48
-        System.out.println();
-    }
-
-    //AbstractQueuedSynchronizer
-
     /**
      * leetcode：91：解码方法
      * @return
@@ -26,7 +18,93 @@ public class Solution1111 {
 
         }
     }*/
+    //自下而上进行归并
+    /**
+    public ListNode sortList(ListNode head) {
+        if(head==null||head.next==null){return head;}
+        ListNode fast = head.next, slow = head;
+        ListNode[] counter = new ListNode[64];
+        ListNode curNode = head;
+        int maxIndex = 0;
+        while (curNode!=null){
+            ListNode carryNode = curNode;
+            curNode = curNode.next;
+            carryNode.next = null;
+            int i = 0;
+            while (counter[i]!=null){
+                ListNode newMergeNode = mergeTwoSortedListNode(carryNode,counter[i]);
+                counter[i]=null;
+                i++;
+                carryNode = newMergeNode;
+            }
+            counter[i] = carryNode;
+            if (i>maxIndex){
+                maxIndex = i;
+            }
+        }
 
+    }*/
+    public static void main(String[] args) {
+        int[] arr = {1,45,56,5,76,6,76,76,88686,9};
+        mergeSort(arr,0,arr.length-1);
+        System.out.println(Arrays.toString(arr));
+    }
+    //归并
+    public static void mergeSort(int[] a, int low, int high){
+        int mid = (low+high)/2;
+        if (low<high){
+            mergeSort(a,low,mid);//左边
+            mergeSort(a,mid+1,high);//右边
+            merge(a,low,mid,high);
+        }
+    }
+    public static void merge(int[] a, int low, int mid, int high){
+        int[] temp = new int[high-low+1];
+        int i = low;
+        int j = mid+1;
+        int k =0;
+        while (i<=mid&&j<=high){
+            if (a[i]<a[j]){
+                temp[k++] = a[i++];
+            }else {
+                temp[k++] = a[j++];
+            }
+        }
+        while (i<=mid){
+            temp[k++] = a[i++];
+        }
+        while (j<=high){
+            temp[k++] = a[j++];
+        }
+        for (int k2=0;k2<temp.length;k2++){
+            a[k2+low] = temp[k2];
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+    private ListNode mergeTwoSortedListNode(ListNode l1, ListNode l2){
+        if (l1==null){
+            return l1;
+        }
+        if (l2==null){
+            return l2;
+        }
+        if (l1.val<l2.val){
+            l1.next = mergeTwoSortedListNode(l1.next,l2);
+            return l1;
+        }else {
+            l2.next = mergeTwoSortedListNode(l1,l2.next);
+            return l2;
+        }
+    }
 
 
     /**
@@ -776,23 +854,7 @@ class RandomListNode {
 
     }
 
-    /**
-    Stack<Integer> stack1 = new Stack<Integer>();
-    Stack<Integer> stack2 = new Stack<Integer>();
 
-    public void push(int node) {
-        stack1.push(node);
-    }
-    public int pop() {
-        while (!stack1.isEmpty()) {
-            stack2.push(stack1.pop());
-        }
-        int value = stack2.pop();
-        while (!stack2.empty()) {
-            stack1.push(stack2.pop());
-        }
-        return value;
-    }*/
     Stack<Integer> stack1 = new Stack<>();
     Stack<Integer> stack2 = new Stack<>();
 
@@ -910,21 +972,8 @@ class RandomListNode {
 
 
 
-     int len = nums.length;
-     int[] res=new int[len];
-     Arrays.fill(res,-1);
-     Stack<Integer> stack = new Stack<>();
-     for (int i = 0; i < len*2; i++){
-     while (!stack.isEmpty()&&nums[stack.peek()]<nums[i%len]){
-     res[stack.pop()] = i%len;
-     }
-     if (i<len){
-     stack.push(i);
-     }
-     }
-     return res;
+   **/
 
-**/
 
 
 
@@ -984,6 +1033,14 @@ class RandomListNode {
 
 
 
+class Node {
+    public int val;
+    public Node left;
+    public Node right;
+    public Node(int val){
+        this.val = val;
+    }
+}
 
 
 
@@ -991,9 +1048,19 @@ class RandomListNode {
 
 
 
+    /**
 
+    class Node {
+        public int val;
+        public Node next;
+        public Node random;
 
+        public Node() {}
 
+        public Node(int _val) {
+            val = _val;
+        }
+    };
 
 
-
+*/

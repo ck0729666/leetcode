@@ -1,8 +1,9 @@
+/**
 package com.ck.demo.test;
 
 import java.util.HashMap;
 
-/**
+
  * 定义一个双向链表，包含k-v
  * LRU包含头尾节点、容量、个数、hashmap，构造函数包含capacity和loadSize
  * appendTail(Node node)先判断size是否为0，为0的话则头尾都为node；不为0的话则加到尾部
@@ -11,7 +12,7 @@ import java.util.HashMap;
  * trimToSize()减少size
  * put(int key, int value)
  *
- */
+
 public class LRU {
     private int size;
     private int capacity;
@@ -99,7 +100,7 @@ class Node {
 
 
 
-
+*/
 
 
 
